@@ -1,14 +1,13 @@
 name: Passively triggered github action
- on:
-   repository_dispatch:
+
+on:
+  repository_dispatch:
     types: [trigger-another-repo]
   
 jobs:
   demo:
-    name: Just a demo
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - name: Print trigger info
-            run: echo '"repo":${{github.event.client_payload.repository}}; "job":${{github.event.client_payload.job}}'
-      
+    steps:
+      - name: Print trigger info
+        run: echo '"repo":"${{github.event.client_payload.repository}}"; "job":"${{github.event.client_payload.job}}"'
+        
