@@ -3,11 +3,36 @@ name: Passively triggered github action
 on:
   repository_dispatch:
     types: [trigger-another-repo]
-  
+
 jobs:
-  demo:
+  print-info:
     runs-on: ubuntu-latest
     steps:
       - name: Print trigger info
         run: echo '"repo":"${{github.event.client_payload.repository}}"; "ref_type":"${{github.event.client_payload.ref_type}}"; "ref_name":"${{github.event.client_payload.ref_name}}"; "job":"${{github.event.client_payload.job}}"'
+
+  trigger-testing-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: testing
+      
+      - name: Trigger testing action
+        uses: ./.github/workflows/demo-testing.yml
+        if: |
+          ${{github.event.client_payload.ref_type == 'branch'}} && ${{github.event.client_payload.ref_name == 'testing'}}
+
+  trigger-production-action:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            ref: production
         
+        - name: Trigger production
+          uses: ./.github/workflows/demo-production.yml
+          if: |
+            ${{github.event.client_payload.ref_type == 'branch'}} && ${{github.event.client_payload.ref_name == 'main'}}   
