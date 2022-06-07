@@ -18,3 +18,9 @@ jobs:
   trigger-production-action:
     if: ${{github.event.client_payload.ref_type == 'branch'}} && ${{github.event.client_payload.ref_name == 'main'}}   
     uses: ./.github/workflows/demo-production.yml
+  
+  test-skip:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Hello World!
