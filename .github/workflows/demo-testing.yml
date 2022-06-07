@@ -1,0 +1,9 @@
+name: Testing Demo
+
+on: workflow_dispatch
+
+jobs:
+  demo:
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo This is testing-env github action

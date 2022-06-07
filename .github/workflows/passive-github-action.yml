@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print trigger info
-        run: echo '"repo":"${{github.event.client_payload.repository}}"; "job":"${{github.event.client_payload.job}}"'
+        run: echo '"repo":"${{github.event.client_payload.repository}}"; "ref_type":"${{github.event.client_payload.ref_type}}"; "ref_name":"${{github.event.client_payload.ref_name}}"; "job":"${{github.event.client_payload.job}}"'
         
