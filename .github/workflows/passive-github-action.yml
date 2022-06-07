@@ -8,13 +8,19 @@ jobs:
   print-info:
     runs-on: ubuntu-latest
     steps:
-      - name: Print trigger info
+      - name: Trigger by ${{github.event.client_payload.repository}}-${{github.event.client_payload.ref_name}}
         run: echo '"repo":"${{github.event.client_payload.repository}}"; "ref_type":"${{github.event.client_payload.ref_type}}"; "ref_name":"${{github.event.client_payload.ref_name}}"; "job":"${{github.event.client_payload.job}}"'
 
   trigger-testing-action:
     if:  ${{ (github.event.client_payload.ref_type == 'branch') && (github.event.client_payload.ref_name == 'testing') }}
     uses: ./.github/workflows/demo-testing.yml
+    with:
+      REPO: ${{github.event.client_payload.repository}}
+      REF_NAME: ${{github.event.client_payload.ref_name}}
 
   trigger-production-action:
     if: ${{ (github.event.client_payload.ref_type == 'branch') && (github.event.client_payload.ref_name == 'main') }}  
     uses: ./.github/workflows/demo-production.yml
+    with:
+      REPO: ${{github.event.client_payload.repository}}
+      REF_NAME: ${{github.event.client_payload.ref_name}}

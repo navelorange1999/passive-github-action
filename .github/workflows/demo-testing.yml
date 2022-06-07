@@ -2,10 +2,17 @@ name: Testing Demo
 
 on: 
   workflow_call:
+    inputs:
+      REPO:
+        required: true
+        type: string
+      REF_NAME:
+        required: true
+        type: string
   workflow_dispatch:
 
 jobs:
   demo:
       runs-on: ubuntu-latest
       steps:
-        - run: echo This is testing-env github action
+        - run: echo 'Testing:Trigger by ${{inputs.REPO}}-${{inputs.REF_NAME}}'

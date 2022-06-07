@@ -2,10 +2,17 @@ name: Production Demo
 
 on: 
   workflow_call:
+    inputs: 
+      REPO:
+        required: true
+        type: string
+      REF_NAME:
+        required: true
+        type: string
   workflow_dispatch:
 
 jobs:
   demo:
       runs-on: ubuntu-latest
       steps:
-        - run: echo This is production-env github action
+        - run: echo 'Production:Trigger by ${{inputs.REPO}}-${{inputs.REF_NAME}}'
