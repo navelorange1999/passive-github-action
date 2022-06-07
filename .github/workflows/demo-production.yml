@@ -14,5 +14,8 @@ on:
 jobs:
   demo:
       runs-on: ubuntu-latest
+      concurrency:
+        group: deploy-docs-production
+        cancel-in-progress: true
       steps:
-        - run: echo 'Production:Trigger by ${{inputs.REPO}}-${{inputs.REF_NAME}}'
+        - run: echo 'Production:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}}'
