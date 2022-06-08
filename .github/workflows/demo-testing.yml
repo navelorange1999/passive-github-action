@@ -15,7 +15,7 @@ jobs:
   demo:
       runs-on: ubuntu-latest
       concurrency:
-        group: deploy-docs-production
+        group: deploy-testing
         cancel-in-progress: true
       steps:
-        - run: echo 'Testing:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}}'
+        - run: echo 'Testing:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}} - ${{secrets.DEMO_TOKEN}}'

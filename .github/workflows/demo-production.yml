@@ -1,6 +1,6 @@
 name: Production Demo
 
-on: 
+on:
   workflow_call:
     inputs: 
       REPO:
@@ -9,13 +9,17 @@ on:
       REF_NAME:
         required: true
         type: string
+    secrets:
+      DEMO_TOKEN:
+        description: 'Only a demo for test'
+        required: true
   workflow_dispatch:
 
 jobs:
   demo:
       runs-on: ubuntu-latest
       concurrency:
-        group: deploy-docs-production
+        group: deploy-production
         cancel-in-progress: true
       steps:
-        - run: echo 'Production:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}}'
+        - run: echo 'Production:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}} - ${{secrets.DEMO_TOKEN}}'
