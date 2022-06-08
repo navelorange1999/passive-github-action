@@ -10,8 +10,8 @@ on:
         required: true
         type: string
     secrets:
-      DEMO_TOKEN:
-        description: 'Only a demo for test'
+      TEST_CALL_SLACK:
+        description: 'Only a demo for slack test'
         required: true
   workflow_dispatch:
 
@@ -22,4 +22,20 @@ jobs:
         group: deploy-production
         cancel-in-progress: true
       steps:
-        - run: echo 'Production:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}} - ${{secrets.DEMO_TOKEN}}'
+        - run: echo 'Production:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}} - ${{github.event_name}}'
+
+  send-status-message:
+      needs: [demo]
+      if: (failure() || success() && github.event_name == 'repository_dispatch')
+      runs-on: ubuntu-latest
+      steps:
+        - name: Send status to Slack channel
+          id: Slack
+          uses: slackapi/slack-github-action@v1.19.0
+          with:
+            payload: |
+              {
+                "from": "${{inputs.REPO}}:${{inputs.REF_NAME}}"
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.TEST_CALL_SLACK }}

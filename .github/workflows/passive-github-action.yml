@@ -17,6 +17,8 @@ jobs:
     with:
       REPO: ${{github.event.client_payload.repository}}
       REF_NAME: ${{github.event.client_payload.ref_name}}
+    secrets:
+      TEST_CALL_SLACK: ${{ secrets.TEST_CALL_SLACK }}
 
   trigger-production-action:
     if: ${{ github.event.client_payload.ref_type == 'tag' }}  
@@ -24,3 +26,5 @@ jobs:
     with:
       REPO: ${{github.event.client_payload.repository}}
       REF_NAME: ${{github.event.client_payload.ref_name}}
+    secrets:
+      TEST_CALL_SLACK: ${{ secrets.TEST_CALL_SLACK }}
