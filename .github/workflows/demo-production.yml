@@ -35,7 +35,7 @@ jobs:
           with:
             payload: |
               {
-                "from": "${{inputs.REPO}}:${{inputs.REF_NAME}}"
+                "from": "${{inputs.REPO}}:${{inputs.REF_NAME}}/${{inputs.RELEASE_BRANCH}}"
               }
           env:
             SLACK_WEBHOOK_URL: ${{ secrets.TEST_CALL_SLACK }}
