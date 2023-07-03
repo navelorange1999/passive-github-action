@@ -26,5 +26,6 @@ jobs:
     with:
       REPO: ${{github.event.client_payload.repository}}
       REF_NAME: ${{github.event.client_payload.ref_name}}
+      RELEASE_BRANCH: ${{github.event.client_payload.release_branch}}
     secrets:
       TEST_CALL_SLACK: ${{ secrets.TEST_CALL_SLACK }}
