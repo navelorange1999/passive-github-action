@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger by ${{github.event.client_payload.repository}}:${{github.event.client_payload.ref_name}}
-        run: echo '"repo":"${{github.event.client_payload.repository}}"; "ref_type":"${{github.event.client_payload.ref_type}}"; "ref_name":"${{github.event.client_payload.ref_name}}"; "release_branch":"${{${{github.event.client_payload.release_branch}}}}"; "job":"${{github.event.client_payload.job}}"'
+        run: echo '"repo":"${{github.event.client_payload.repository}}"; "ref_type":"${{github.event.client_payload.ref_type}}"; "ref_name":"${{github.event.client_payload.ref_name}}"; "release_branch":"${{github.event.client_payload.release_branch}}"; "job":"${{github.event.client_payload.job}}"'
 
   trigger-testing-action:
     if:  ${{ (github.event.client_payload.ref_type == 'branch') && (github.event.client_payload.ref_name == 'testing') }}
