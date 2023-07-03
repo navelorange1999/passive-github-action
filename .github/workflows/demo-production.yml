@@ -9,6 +9,9 @@ on:
       REF_NAME:
         required: true
         type: string
+      RELEASE_BRANCH:
+          required: true
+          type: string
     secrets:
       TEST_CALL_SLACK:
         description: 'Only a demo for slack test'
