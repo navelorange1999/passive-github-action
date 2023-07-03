@@ -22,7 +22,7 @@ jobs:
         group: deploy-production
         cancel-in-progress: true
       steps:
-        - run: echo 'Production:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}} - ${{github.event_name}}'
+        - run: echo 'Production:Trigger by ${{inputs.REPO}}:${{inputs.REF_NAME}}/${{inputs.RELEASE_BRANCH}} - ${{github.event_name}}'
 
   send-status-message:
       needs: [demo]
